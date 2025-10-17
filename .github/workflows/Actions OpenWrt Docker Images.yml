@@ -151,7 +151,7 @@ jobs:
             
       - name: Save Image
         run: |
-          # docker pull ${{ secrets.DOCKERHUB_USERNAME }}/openwrt
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/openwrt
           docker save -o openwrt.tar ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:latest
 
       # - name: Upload Image
