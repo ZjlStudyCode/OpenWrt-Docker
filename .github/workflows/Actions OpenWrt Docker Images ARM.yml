@@ -116,7 +116,6 @@ jobs:
           chmod +x files/etc/rc.local
 
       - name: Build RootFS (ARM)
-        if: startsWith(env.DOCKER_EXTERA_TAG, 'arm')
         run: |
           cd immortalwrt-imagebuilder-$DEVICE_VERSION-$DEVICE_TARGET-$DEVICE_SUBTARGET.Linux-x86_64
           chmod +x $GITHUB_WORKSPACE/scripts/*
@@ -131,7 +130,6 @@ jobs:
           rm -rf openwrt-imagebuilder*
 
       - name: Build & Push Image (ARM)
-        if: startsWith(env.DOCKER_EXTERA_TAG, 'arm')
         uses: docker/build-push-action@v4
         with:
           platforms: ${{ env.DOCKER_IMAGE_ARCH }}
@@ -147,7 +145,6 @@ jobs:
             ${{ vars.ALIYUN_REGISTRY }}/${{ vars.ALIYUN_NAMESPACES }}/openwrt:${{ env.DOCKER_EXTERA_TAG }}
             
       - name: Save Image
-        if: startsWith(env.DOCKER_EXTERA_TAG, 'arm')
         run: |
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/openwrt
           docker save -o openwrt.tar ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:latest
